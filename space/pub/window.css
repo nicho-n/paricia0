@@ -1,0 +1,41 @@
+.wpFrame {
+    position: absolute;
+    z-index: 400;
+    background-color: #black;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+    color:white;
+    top:0px;
+    left:0px;
+    background-color:black;
+    opacity:0.9;
+    resize:both;
+    overflow: auto;
+    margin-top: 30px;
+}
+
+.wpTop{
+   position:absolute;
+   z-index:401;
+   top: 30%;
+   left:36%;
+   opacity:0.8;
+   background-color: cyan;
+   border: 1px solid grey
+}
+
+
+pre{
+    position: absolute;
+    top: 25px;
+    color: white;
+    text-align:center;
+}
+
+#usernameprompt{
+	position:absolute;
+	top:195px;
+	left:100px;
+}
+
+

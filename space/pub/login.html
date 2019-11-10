@@ -1,0 +1,81 @@
+<html>
+<head>		
+   <style>
+	pre{
+        	color:white;
+	}
+	#play{
+		position: absolute;
+		margin-top:40px;
+		left:100px;
+	
+	}
+	#usernameprompt{
+		position:absolute;
+		left:75px;
+	}
+
+	#passcodeprompt{
+		position:absolute;
+		left:75px;
+		bottom: 30px;
+	}
+   </style>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+
+</head>
+   
+<pre>
+    __               __     _          _____
+   / /   ____  _____/ /_   (_)___     / ___/____  ____ _________
+  / /   / __ \/ ___/ __/  / / __ \    \__ \/ __ \/ __ `/ ___/ _ \
+ / /___/ /_/ (__  ) /_   / / / / /   ___/ / /_/ / /_/ / /__/  __/
+/_____/\____/____/\__/  /_/_/ /_/   /____/ .___/\__,_/\___/\___/
+                                        /_/
+         A multiplayer game: get lost with your friends!!
+                       Move        : wasd
+                       Look Around : Arrow keys
+	Your passcode is not encrypted! If you enter a new 
+	username, a new character will be created.
+</pre>
+<input id = "usernameprompt" placeholder="please enter a username.."></input>
+<input id = "passcodeprompt" placeholder="please enter your passcode"></input>
+<button id = "play" style="margin-left: 200px; margin-bottom:3px;" onclick="connect">Try?</button>
+
+</html>
+<script>
+        var usernamePrompt = document.getElementById("usernameprompt");
+        var passcodePrompt = document.getElementById("passcodeprompt");
+        var chat = window.parent.document.getElementById("chat");
+
+
+function connect(){        
+	var login = [];
+	login.push(usernamePrompt.value);
+	login.push(passcodePrompt.value);
+
+        var popup = window.parent.document.getElementById("logintop");
+        var ok = window.parent.document.getElementById("login");
+	socket.emit('login attempt', login);
+
+}
+
+document.getElementById("play").onclick = connect;
+
+var good = 0;
+var socket = io();
+socket.on('login ok', function(fetchedPlayer) {
+        chat.contentWindow.postMessage(usernamePrompt.value, 'http://localhost:3004');	
+	parent.loadPlayer(usernamePrompt.value, passcodePrompt.value, fetchedPlayer);
+});
+
+socket.on('login bad', function() {
+        play.innerHTML = "BAD!";
+});
+
+
+
+</script>

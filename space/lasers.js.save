@@ -1,0 +1,34 @@
+var raycaster = new Three.Raycaster();
+
+//laser parameters
+var maxLasers = 16;
+var nActive = 0;
+var beamLength = 100;
+var laserVelocity = 1000;
+var lasers = [];
+var collisionDist = beamLength;
+
+var laserRadius = 0.5;
+laserGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, beamLength/2, 0));
+laserGeom.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI/2));
+var laserMat = new THREE.MeshPhongMaterial({
+	ambient : 0,
+        emissive : 0xff0000,
+        color : 0xff0000,
+        specular : 0x101010,
+        shininess: 20
+});
+
+function onMouseDown(event) {
+	raycaster.setFromCamera(mouse, camera);
+	var laser = new THREE.Mesh(laserGeom, laserMat);
+	laser.position.copy(camera.position);
+	laser.dir.copy(raycaster.ray.direction);
+}
+
+function animateLaser(t){
+
+
+
+}
+	var light = new THREE.DirectionalLight(0x999999);	var light = new THREE.DirectionalLight(0x999999);   

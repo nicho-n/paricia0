@@ -1,0 +1,133 @@
+<html>
+<head>
+   <style>
+        body{
+                color:white;
+		font-size: 15px;
+		font-family: monospace;
+		background-color: black;
+		overflow:hidden;
+        }
+        
+	table {
+		font-size:12px;
+    		border-collapse: collapse;
+        	width: 100%;
+	}
+	input{
+		color:white;
+	}
+	th {
+		color: pink;
+		font-size:15px;
+		border-bottom: 1px solid white;
+	}
+
+	#commodityInfo{
+		position:absolute;
+		bottom:0px;
+		height: 190px;
+		width: 100%;	
+		border: 0px;
+	}
+
+	#tabs{
+		font-size: 13px;
+		color:pink;
+	}
+
+	#buyTab{
+		width: 50px;
+		text-align: center;
+		border: 1px solid pink;
+		display: inline-block;
+		background-color: blue;
+	}
+
+	#sellTab{
+		width: 50px;
+		text-align: center;
+		color: magenta;
+		border: 1px solid magenta;
+		display: inline-block;
+		
+	}
+
+	#slider {
+        	position: absolute;
+        	bottom: 0px;
+        	left:0px;
+	}
+
+	#number{
+        	position: absolute;
+		width: 46px;
+        	bottom: 0px;
+		left: 177px;
+		color:black;
+	}
+
+#buy{
+        position: absolute;
+        bottom: 0px;
+	left: 228px;
+}
+
+
+	td,th {
+    		text-align: left;
+    		padding: 0px;
+	}
+
+	tr:hover{
+		background-color:blue;
+	}
+	tr:first-child{
+		background-color:black;
+		color: pink;
+		font-size: 14px;
+	}
+
+td:last-child, th:last-child, th:nth-child(2), td:nth-child(2){
+	text-align:right;
+}
+
+</style>
+</head>
+<body>
+  <div id = "tabs">
+  <div id = "buyTab">Buy</div>
+  <div id = "sellTab">Sell</div>
+  <ul>	
+</div>
+<div id = "commodityList">
+</div>
+
+<iframe id = "commodityInfo">
+Click on an item to see more information.
+</iframe>
+<input type="range" id="slider" min="0" max="100" value="50" class="slider"></input>
+<input type ="text" id ="number" value="0" color="black"></input>
+<button id="buy">$</button>
+
+
+</body>
+</html>
+<script src = "newStation.js"></script>
+<script src = "commodity.js"></script>
+<script>
+
+
+
+var station = new Station();
+var sellTab = document.getElementById("sellTab");
+var buyTab = document.getElementById("buyTab");
+buyTab.onclick = station.loadBuyTab;
+sellTab.onclick = station.loadSellTab;
+station.commodities["Prescription Medication"] = new Commodity("Prescription Medication", 5, 5, "corn.html", "corn.html");
+station.commodities["Cognac"] = new Commodity("Cognac", 7, 10, "corn.html", "corn.html");
+station.commodities["Prescription Medication"].quantity = 100000;
+station.commodities["Cognac"].quantity = 5000;
+station.loadCommodityTable();
+
+</script>

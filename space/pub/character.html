@@ -1,0 +1,24 @@
+<html>
+<head>
+<style>
+        body{
+                color:white;
+		font-family: monospace;
+        }
+</style>
+</head>
+<body>
+<div id="characterinfo"></div>
+</body>
+</html>
+<script>
+var p = window.parent.window.parent.playerInfo;
+var a = document.getElementById("characterinfo");
+a.innerHTML = "<h1>" + p.username + "</hi><br>";
+a.innerHTML += "<h3>" + p.money + " credits. </h3><br>";
+
+a.innerHTML += "Inventory:<br>";
+for (var key in p.inventory){
+	a.innerHTML += key + ": " +  p.inventory[key].quantity + "<br>";
+}
+</script>

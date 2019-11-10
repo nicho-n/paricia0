@@ -1,0 +1,131 @@
+var commodityInfo = document.getElementById("commodityInfo");
+var p = window.parent.window.parent.playerInfo;
+var commodityList = document.getElementById("commodityList");
+var buyTab = document.getElementById("buyTab");
+var sellTab = document.getElementById("sellTab");
+var _this;
+var activeTab = "buyTab";
+var selectedItem = 0;
+
+function displayInfo(file, commodity){
+	commodityInfo.src = file;
+	selectedItem = commodity;
+}
+
+
+
+class Station{
+	constructor(){
+		_this = this;
+		_this.commodities = {};
+	}
+
+	addCommodity(key, commodity){
+		commodities[key] = commodity;
+	}
+
+	loadBuyTab(){
+		activeTab = "buyTab";
+		buyTab.style.backgroundColor = "blue";
+		sellTab.style.backgroundColor = "black";
+		commodityList.innerHTML = "";
+		var table = document.createElement("table");
+		table.id="table";
+		var tr = document.createElement("tr");
+		var td1 = document.createElement("td");
+		var td2 = document.createElement("td");
+		var text1 = document.createTextNode("Items");
+		var text2 = document.createTextNode("Price");
+		td1.appendChild(text1);
+		td2.appendChild(text2);
+
+		tr.appendChild(td1);
+		tr.appendChild(td2);
+
+		table.appendChild(tr);
+
+		for (var key in _this.commodities){
+			//var tr = document.createElement("tr");
+			var tr = table.insertRow();
+			var td1 = document.createElement("td");
+			var td2 = document.createElement("td");
+			var text1 = document.createTextNode(_this.commodities[key].name);
+			var text2 = document.createTextNode(_this.commodities[key].price);
+			td1.appendChild(text1);
+			td2.appendChild(text2);
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			tr.onclick = function() { displayInfo(_this.commodities[key].buyPage, _this.commodities[key]); };
+			table.appendChild(tr);
+		}
+
+		commodityList.appendChild(table);
+var x = document.getElementById("table").rows
+        for (var i = 0; i < x.length-1; i++){
+                x[i].onclick = function(){
+                        displayInfo(x[i].cells[0].innerHTML, x[i].cell[0].innerHTML);
+                };
+        }       
+
+
+
+	}
+
+	loadSellTab(){
+		activeTab = "sellTab";
+		sellTab.style.backgroundColor = "blue";
+		buyTab.style.backgroundColor = "black";
+        	commodityList.innerHTML = "";
+                var table = document.createElement("table");
+		table.id= "table";
+                var tr = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var td2 = document.createElement("td");
+                var text1 = document.createTextNode("Your Items");
+                var text2 = document.createTextNode("Sell Price");
+                td1.appendChild(text1);
+                td2.appendChild(text2);
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+
+                table.appendChild(tr);
+
+                for (var key in p.inventory){
+                        var tr = document.createElement("tr");
+                        var td1 = document.createElement("td");
+                        var td2 = document.createElement("td");
+                        var text1 = document.createTextNode(p.inventory[key].name);
+                        var text2 = document.createTextNode(p.inventory[key].price);
+                        td1.appendChild(text1);
+                        td2.appendChild(text2);
+                        tr.appendChild(td1);
+                        tr.appendChild(td2);
+                        table.appendChild(tr);
+                }
+
+                commodityList.appendChild(table);
+	}
+
+}
+
+var slider = document.getElementById("slider");
+var number = document.getElementById("number");
+var button = document.getElementById("buy");
+slider.oninput = function(){
+	number.value = slider.value;
+	button.innerHTML = (slider.value * 5)+"$";
+}
+
+if (activeTab = "buyTab"){	
+	slider.max = Math.min((p.money/5), p.cargoSpace/5);
+	button.onclick = function(){
+		button.innerHTML = "Ty!"
+		p.inventory[selectedItem.name] = selectedItem;
+		p.inventory[selectedItem.name].quantity = slider.value;
+		slider.value = 1;
+		number.value = 1;
+		
+	}
+}
+

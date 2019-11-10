@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+	  <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	</head>
+	<body>
+       	  <div id = "box">
+	  <div id = "messages">
+	  </div>  
+	  <div id = "bottom">
+            <div id="action"><span id ="channel">world</span></div>
+            <input id="input" type="text"></input>
+          </div>
+	  </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="login.js"></script>
+
+<script>
+    $(function () {
+    var username;	
+    window.addEventListener('message', function(e) {
+  		username = e;
+                socket.emit('newuser', username);
+    });
+    var socket = io();
+    var message = document.getElementById("input");
+
+    $("input").keypress(function(event){
+      if (event.which == 13 && message === document.activeElement){
+        socket.emit('message', window.parent.un + ": " + message.value);
+        message.value = "";
+        return false;
+      }
+    });
+    socket.on('message', function(msg){
+      $('#messages').append(msg + '<br>');
+    });
+  });
+
+</script>	
+     </body>
+
+</html>
+
+<style>
+body{
+        background-color: black;
+}
+
+#messages{
+	position: absolute;
+	word-wrap: break-word;
+	height: 275px;
+	width: 220px;
+	overflow:auto;
+}
+
+#box{
+        position: absolute;
+        height:300px;
+        width: 350px;
+        word-wrap: break-word;
+        bottom:0px;
+        left:0px;
+        background-color: black;
+        color: white;
+        font-family: Monospace;
+}
+
+#bottom{
+        position: absolute;
+        bottom: 0px;
+
+}
+
+#input{ 
+        position: absolute;
+        width: 295px;
+        bottom:2px;
+        left:50px;
+        background-color:grey;
+        color: white;
+}
+
+#action{
+        position: absolute;
+        left: 3px;
+        bottom: 2px;
+        width:43px;
+        height:20px;
+        text-align: center;
+        border: 1px solid white;
+}
+
+#send{
+        color: black;
+        background-color: grey;
+}
+
+#channel{
+        position: absolute;
+        left: 4px;
+        top: 3px;
+        color: orange;
+}
+
+</style>
+
+	
+
+

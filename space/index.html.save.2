@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>random space trading sim (pre-alpha)</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background:#000;
+				color: #eee;
+				padding:0;
+				margin:0;
+				font-weight:bold;
+				overflow:hidden;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+			}
+			#info {
+				position: absolute;
+				top: 0px; width: 100%;
+				padding: 5px;
+				z-index:100;
+			}
+			#welcome{
+				display: none;
+			}
+			#chat{
+    				position: absolute;
+				bottom: 10px;
+				left: 10px;
+				height: 200px;
+				width: 402px;
+				resize:both;
+				overflow:auto;
+				z-index: 101;
+				border: 1px solid white;
+			}
+			#usernameprompt{
+				position: absolute;
+                                bottom:18px;
+                                left: 295px
+			}
+                        #play{
+				position: absolute;
+				left: 125px;
+				bottom: 1px;
+				
+			}
+			#messages{
+				position:absolute;
+				left:0px;
+			}
+			#input{
+				position:absolute;
+				bottom:0px;
+				background-color: #ffffff;
+			}
+			#message{
+				position:absolute;
+				right:0px;
+			}
+			#send{
+				position:absolute;
+				bottom:0px;
+				right:10px;
+				background-color: black;
+				color:white;
+	
+			}
+
+			a {
+			color: #0080ff;
+			}
+			b { color:orange }
+		</style>
+		
+		<link rel="stylesheet" href="window.css">
+		<script src="js/three.js"></script>
+		<script src="js/OBJLoader.js"></script>
+		<script src="js/controls/FlyControls.js"></script>
+
+		<script src="js/shaders/CopyShader.js"></script>
+		<script src="js/shaders/FilmShader.js"></script>
+
+		<script src="js/postprocessing/EffectComposer.js"></script>
+		<script src="js/postprocessing/ShaderPass.js"></script>
+		<script src="js/postprocessing/MaskPass.js"></script>
+		<script src="js/postprocessing/RenderPass.js"></script>
+		<script src="js/postprocessing/FilmPass.js"></script>
+
+		<script src="js/Detector.js"></script>
+		<script src="js/libs/stats.min.js"></script>
+	        <script src="/socket.io/socket.io.js"></script>
+                <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+ 		<script src="chatbox.js"></script>
+
+
+	</head>
+
+	<body>
+        <script src = "login.js"></script>
+	<div id="game">
+		<div id="info"><b>position:<span id = "pos"></span></b>
+		</div>
+		<iframe id="chat" src="http://localhost:3004">
+		</iframe>
+<div id = welcome>
+<pre>
+ ______     ______     __    __     __     __   __     ______    
+/\  ___\   /\  __ \   /\ "-./  \   /\ \   /\ "-.\ \   /\  ___\   
+\ \ \____  \ \ \/\ \  \ \ \-./\ \  \ \ \  \ \ \-.  \  \ \ \__ \  
+ \ \_____\  \ \_____\  \ \_\ \ \_\  \ \_\  \ \_\\"\_\  \ \_____\ 
+  \/_____/   \/_____/   \/_/  \/_/   \/_/   \/_/ \/_/   \/_____/ 
+ 
+ ______     ______     ______     __   __    
+/\  ___\   /\  __ \   /\  __ \   /\ "-.\ \   
+\ \___  \  \ \ \/\ \  \ \ \/\ \  \ \ \-.  \  
+ \/\_____\  \ \_____\  \ \_____\  \ \_\\"\_\ 
+  \/_____/   \/_____/   \/_____/   \/_/ \/_/ 
+
+                                                                                                            
+<button id = "play" style="margin-left: 4px" onclick="connect()">Try?</button>
+</pre>
+</div>
+
+	</div>	
+
+	</body>
+</html>
+                <script src="main3.js"></script>
+                <script src="window.js"></script>
+
